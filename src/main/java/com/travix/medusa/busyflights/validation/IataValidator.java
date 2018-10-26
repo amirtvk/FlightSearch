@@ -4,12 +4,12 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.HashMap;
 
-public class IataValidator implements ConstraintValidator<IataValue, String> {
+public class IataValidator implements ConstraintValidator<IataFormat, String> {
 
     HashMap<String,Boolean> IATA_Cache;
 
     @Override
-    public void initialize(IataValue iataValue) {
+    public void initialize(IataFormat iataValue) {
         //TODO : Initialize Catch of IATA Values from DB
         IATA_Cache = new HashMap<>();
         IATA_Cache.put("PWA", true);
@@ -21,6 +21,6 @@ public class IataValidator implements ConstraintValidator<IataValue, String> {
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if(value == null || value.isEmpty())
             return false;
-        return (IATA_Cache.get(value) == true) ? true : false;
+        return (Boolean.TRUE.equals(IATA_Cache.get(value))) ? true : false;
     }
 }
