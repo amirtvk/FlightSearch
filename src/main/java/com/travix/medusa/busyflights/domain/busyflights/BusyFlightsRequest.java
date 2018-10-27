@@ -3,7 +3,8 @@ package com.travix.medusa.busyflights.domain.busyflights;
 import com.travix.medusa.busyflights.domain.BaseRequest;
 import com.travix.medusa.busyflights.validation.IataFormat;
 import com.travix.medusa.busyflights.validation.TimeFormat;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Size;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
     This class inherit from BaseRequest class in order to add sort  functionality
 */
 
+@NoArgsConstructor
 @Data
 public class BusyFlightsRequest extends BaseRequest {
 
@@ -30,4 +32,19 @@ public class BusyFlightsRequest extends BaseRequest {
 
     @Range(min = 1, max = 4)
     private int numberOfPassengers;
+
+    @Builder
+    public BusyFlightsRequest(String sort,
+                              String origin,
+                              String destination,
+                              String departureDate,
+                              String returnDate,
+                              int numberOfPassengers) {
+        super(sort);
+        this.origin = origin;
+        this.destination = destination;
+        this.departureDate = departureDate;
+        this.returnDate = returnDate;
+        this.numberOfPassengers = numberOfPassengers;
+    }
 }

@@ -1,7 +1,9 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class BusyFlightsResponse {
     private String airline;
@@ -11,5 +13,4 @@ public class BusyFlightsResponse {
     private String destinationAirportCode;
     private String departureDate;
     private String arrivalDate;
-
 }
