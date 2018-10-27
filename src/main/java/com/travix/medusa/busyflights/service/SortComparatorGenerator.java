@@ -1,25 +1,21 @@
-package com.travix.medusa.busyflights.controller;
+package com.travix.medusa.busyflights.service;
 
 import com.travix.medusa.busyflights.domain.BaseRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 
-@Service
-public class ControllerSortUtil {
+@Component
+public class SortComparatorGenerator {
 
     public static final String SORT_ORDER_SEPERATOR  = ",";
-
 
     public enum SortOrder{
         Ascending,
         Descending
     }
-
 
     @Value("${search.defaultSortField:fare}")
     private String defaultSortField;
@@ -29,9 +25,8 @@ public class ControllerSortUtil {
 
 
     public  Comparator generateSortComparator(BaseRequest request){
-
         String sortField = extractSortFieldName(request);
-        Comparator<BusyFlightsResponse> comparator = null;
+        Comparator<BusyFlightsResponse> comparator;
         switch (sortField){
             case "fare":
                 comparator = Comparator.comparingDouble(BusyFlightsResponse::getFare);
@@ -39,7 +34,6 @@ public class ControllerSortUtil {
            default:
                comparator = Comparator.comparingDouble(BusyFlightsResponse::getFare);
         }
-
         if(extractSortOrder(request).equals(SortOrder.Descending))
             return comparator.reversed();
         else
@@ -47,7 +41,7 @@ public class ControllerSortUtil {
     }
 
 
-    public  String extractSortFieldName(BaseRequest request){
+    public String extractSortFieldName(BaseRequest request){
         if(request.getSort() == null || request.getSort().isEmpty())
             return defaultSortField;
         return request.getSort().split(SORT_ORDER_SEPERATOR)[0];
@@ -55,17 +49,12 @@ public class ControllerSortUtil {
 
 
 
-    public  SortOrder extractSortOrder(BaseRequest request){
+    public SortOrder extractSortOrder(BaseRequest request){
         if(request.getSort() == null || request.getSort().isEmpty() || request.getSort().split(SORT_ORDER_SEPERATOR).length == 1)
             return defaultSortOrder.equalsIgnoreCase("asc") ? SortOrder.Ascending : SortOrder.Descending;
 
         String[] sortParam = request.getSort().split(SORT_ORDER_SEPERATOR);
         return sortParam[1].equalsIgnoreCase("ASC") ? SortOrder.Ascending : SortOrder.Descending;
     }
-
-
-
-
-
 
 }
