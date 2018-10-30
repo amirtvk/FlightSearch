@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * Created by amir on 5/9/19.
  */
 @Component
-public class ToughJetProvider implements FlightProvider<ToughJetRequest, ToughJetResponse>{
+public class ToughJetProvider implements ClientBasedFlightProvider<ToughJetRequest, ToughJetResponse> {
 
     @Autowired
     @Qualifier("toughJetClient")

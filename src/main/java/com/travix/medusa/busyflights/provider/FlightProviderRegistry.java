@@ -11,14 +11,14 @@ import java.util.List;
 @Service
 public class FlightProviderRegistry {
 
-    List<FlightProviderInterface> providers;
+    List<FlightProvider> providers;
 
     @Autowired
-    public void setProviders(List<FlightProviderInterface> providers) {
+    public void setProviders(List<FlightProvider> providers) {
         this.providers = providers;
     }
 
-    public List<FlightProviderInterface> getProviders() {
+    public List<FlightProvider> getProviders() {
         return providers;
     }
 }

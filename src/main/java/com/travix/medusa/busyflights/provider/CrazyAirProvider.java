@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class CrazyAirProvider implements FlightProvider<CrazyAirRequest, CrazyAirResponse>{
+public class CrazyAirProvider implements ClientBasedFlightProvider<CrazyAirRequest, CrazyAirResponse> {
 
     @Autowired
     @Qualifier("crazyAirClient")

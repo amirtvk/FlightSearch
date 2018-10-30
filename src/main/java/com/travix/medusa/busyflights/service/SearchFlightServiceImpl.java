@@ -45,11 +45,11 @@ public class SearchFlightServiceImpl implements SearchFlightService {
     @Override
     public List<BusyFlightsResponse> search(BusyFlightsRequest request) {
 
-        flightRegistery.getProviders().get(1).searchFilghts(request);
+        flightRegistery.getProviders().get(1).searchFlights(request);
 
         return flightRegistery.getProviders()
                 .stream()
-                .map(provider -> executor.submit(() -> provider.searchFilghts(request)))
+                .map(provider -> executor.submit(() -> provider.searchFlights(request)))
                 .flatMap(l -> getFutureResult(l).stream())
                 .sorted(sortCommandGenerator.generateSortCommand(request))
                 .filter( bfr -> Optional.ofNullable(request.getProjection()).isPresent() )
