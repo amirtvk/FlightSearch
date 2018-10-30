@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(SearchFlightController.class)
 @ComponentScan(basePackages = "com.travix.medusa.busyflights.controller")
-public class OriginValidationTest {
+public class DestinationValidationTest {
 
     @Autowired
     private MockMvc mvc;
@@ -39,7 +39,7 @@ public class OriginValidationTest {
     public static final String DEPARTURE_PARAM = "departureDate";
     public static final String RETURN_PARAM = "returnDate";
     public static final String NUMBER_OF_PASSENGERS = "numberOfPassengers";
-    public static final String validDestinationValue = "AAA";
+    public static final String validOriginValue = "AAA";
     public static final String validDepartureValue = "2011-12-03T10:15:30";
     public static final String validReturnDate = "2011-12-09T11:20:30";
     public static final String validNumberOfPassengers = "1";
@@ -50,24 +50,24 @@ public class OriginValidationTest {
         given(searchFlightService.search(request)).willReturn(new ArrayList<>());
 
         mvc.perform(get(SERVICE_URL)
-                .param(ORIGIN_PARAM, "AA")
-                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, "AA")
                 .param(DEPARTURE_PARAM, validDepartureValue)
                 .param(RETURN_PARAM, validReturnDate)
                 .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
                 .andExpect(status().is4xxClientError());
 
         mvc.perform(get(SERVICE_URL)
-                .param(ORIGIN_PARAM, "AAZA")
-                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, "AAZA")
                 .param(DEPARTURE_PARAM, validDepartureValue)
                 .param(RETURN_PARAM, validReturnDate)
                 .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
                 .andExpect(status().is4xxClientError());
 
         mvc.perform(get(SERVICE_URL)
-                .param(ORIGIN_PARAM, "AAZ")
-                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, "AAZ")
                 .param(DEPARTURE_PARAM, validDepartureValue)
                 .param(RETURN_PARAM, validReturnDate)
                 .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
@@ -80,16 +80,16 @@ public class OriginValidationTest {
         given(searchFlightService.search(request)).willReturn(new ArrayList<>());
 
         mvc.perform(get(SERVICE_URL)
-                .param(ORIGIN_PARAM, "XXX")
-                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, "XXX")
                 .param(DEPARTURE_PARAM, validDepartureValue)
                 .param(RETURN_PARAM, validReturnDate)
                 .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
                 .andExpect(status().is4xxClientError());
 
         mvc.perform(get(SERVICE_URL)
-                .param(ORIGIN_PARAM, "ADE")
-                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, "ADE")
                 .param(DEPARTURE_PARAM, validDepartureValue)
                 .param(RETURN_PARAM, validReturnDate)
                 .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
