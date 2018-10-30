@@ -10,8 +10,8 @@ import java.util.Random;
 public class TestUtil {
     public static BusyFlightsResponse getRandomBusyFlightsResponse(BusyFlightsRequest request){
         return BusyFlightsResponse.builder()
-                .departureDate(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
-                .arrivalDate(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME))
+                .departureDate(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                .arrivalDate(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE))
                 .fare(new Random().nextDouble())
                 .supplier("CrazyAir")
                 .airline("ABC")
