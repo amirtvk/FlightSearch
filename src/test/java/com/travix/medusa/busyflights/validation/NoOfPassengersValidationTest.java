@@ -1,6 +1,7 @@
-package com.travix.medusa.busyflights.controller;
+package com.travix.medusa.busyflights.validation;
 
 import com.travix.medusa.busyflights.TestUtil;
+import com.travix.medusa.busyflights.controller.SearchFlightController;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.service.SearchFlightService;
 import com.travix.medusa.busyflights.validation.IataCache;
