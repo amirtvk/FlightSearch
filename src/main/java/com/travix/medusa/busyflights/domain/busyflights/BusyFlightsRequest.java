@@ -34,8 +34,6 @@ public class BusyFlightsRequest extends BaseRequest {
     @Range(min = 1, max = 4)
     private int numberOfPassengers;
 
-    private Optional<String> limit;
-
 
     @Builder
     public BusyFlightsRequest(String sort,

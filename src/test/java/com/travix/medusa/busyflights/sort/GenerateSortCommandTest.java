@@ -1,14 +1,15 @@
-package com.travix.medusa.busyflights;
+package com.travix.medusa.busyflights.sort;
 
-import com.travix.medusa.busyflights.service.SortCommandGenerator;
+import com.travix.medusa.busyflights.TestUtil;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.service.SortCommandGenerator;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.junit.Assert;
 
 import java.util.Comparator;
 
@@ -16,7 +17,7 @@ import java.util.Comparator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 
-public class GenerateSortComparatorTest {
+public class GenerateSortCommandTest {
 
     @Autowired
     SortCommandGenerator sortCommandGenerator;
