@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(SearchFlightController.class)
 @ComponentScan(basePackages = "com.travix.medusa.busyflights.controller")
-public class ReturnDateValidationTest {
+public class NoOfPassengersValidationTest {
 
     @Autowired
     private MockMvc mvc;
@@ -42,10 +42,10 @@ public class ReturnDateValidationTest {
     public static final String validOriginValue = "AAA";
     public static final String validDestinationValue = "AAA";
     public static final String validDepartureValue = "2011-12-03T10:15:30";
-    public static final String validNumberOfPassengers = "1";
+    public static final String validReturnDate = "2011-12-09T11:20:30";
 
     @Test
-    public void returnDateShouldBeValid() throws Exception {
+    public void departureDateShouldBeInRange() throws Exception {
         BusyFlightsRequest request = TestUtil.getRandomBusyFlightsRequest();
         given(searchFlightService.search(request)).willReturn(new ArrayList<>());
 
@@ -53,25 +53,42 @@ public class ReturnDateValidationTest {
                 .param(ORIGIN_PARAM, validOriginValue)
                 .param(DESTINATION_PARAM, validDestinationValue)
                 .param(DEPARTURE_PARAM, validDepartureValue)
-                .param(RETURN_PARAM, "2011-12-03T10:15:3")
-                .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
+                .param(RETURN_PARAM, validReturnDate)
+                .param(NUMBER_OF_PASSENGERS, "0"))
                 .andExpect(status().is4xxClientError());
 
         mvc.perform(get(SERVICE_URL)
                 .param(ORIGIN_PARAM, validOriginValue)
                 .param(DESTINATION_PARAM, validDestinationValue)
                 .param(DEPARTURE_PARAM, validDepartureValue)
-                .param(RETURN_PARAM, "2011-12-03")
-                .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
+                .param(RETURN_PARAM, validReturnDate)
+                .param(NUMBER_OF_PASSENGERS, "-1"))
                 .andExpect(status().is4xxClientError());
 
         mvc.perform(get(SERVICE_URL)
                 .param(ORIGIN_PARAM, validOriginValue)
                 .param(DESTINATION_PARAM, validDestinationValue)
                 .param(DEPARTURE_PARAM, validDepartureValue)
-                .param(RETURN_PARAM, "2011-12-03T10:15:30")
-                .param(NUMBER_OF_PASSENGERS, validNumberOfPassengers))
+                .param(RETURN_PARAM, validReturnDate)
+                .param(NUMBER_OF_PASSENGERS, "5"))
+                .andExpect(status().is4xxClientError());
+
+        mvc.perform(get(SERVICE_URL)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(DEPARTURE_PARAM, validDepartureValue)
+                .param(RETURN_PARAM, validReturnDate)
+                .param(NUMBER_OF_PASSENGERS, "1"))
                 .andExpect(status().is2xxSuccessful());
+
+        mvc.perform(get(SERVICE_URL)
+                .param(ORIGIN_PARAM, validOriginValue)
+                .param(DESTINATION_PARAM, validDestinationValue)
+                .param(DEPARTURE_PARAM, validDepartureValue)
+                .param(RETURN_PARAM, validReturnDate)
+                .param(NUMBER_OF_PASSENGERS, "4"))
+                .andExpect(status().is2xxSuccessful());
+
     }
 
 }
