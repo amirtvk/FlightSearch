@@ -1,5 +1,5 @@
 package com.travix.medusa.busyflights.provider.calculation;
 
 public interface FareCalculationStrategy<O> {
-    FareCalculationResult calculate(O clientOutput);
+    FareCalculationResult calculate(O response);
 }

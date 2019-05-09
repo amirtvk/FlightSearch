@@ -7,7 +7,9 @@ import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
  */
 public class CrazyAirFareCalculationStrategy implements FareCalculationStrategy<CrazyAirResponse> {
     @Override
-    public FareCalculationResult calculate(CrazyAirResponse clientOutput) {
-        return null;
+    public FareCalculationResult calculate(CrazyAirResponse response) {
+        FareCalculationResult fare = new FareCalculationResult();
+        fare.setFinalPrice(response.getPrice());
+        return fare;
     }
 }
