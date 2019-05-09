@@ -9,15 +9,25 @@ import com.travix.medusa.busyflights.provider.wrapper.FlightProviderWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface FlightProvider {
+public interface FlightProvider<I, O> {
 
-    FlightProviderClient getClient();
+    FlightProviderClient<I, O> getClient();
 
-    FlightProviderWrapper getReqRespWrapper();
+    FlightProviderWrapper<I, O> getReqRespWrapper();
 
-    FareCalculationStrategy getFareCalculationStrategy();
+    FareCalculationStrategy<O> getFareCalculationStrategy();
 
     default List<BusyFlightsResponse> searchFilghts(BusyFlightsRequest busyFlightsRequest){
-        return new ArrayList<>();
+
+        I request = getReqRespWrapper().convertRequest(busyFlightsRequest);
+        List<O> clientResponse = getClient().searchFlights(request);
+        List<BusyFlightsResponse> result = new ArrayList<>();
+
+        for(O item : clientResponse){
+            BusyFlightsResponse busyFlightResponse = getReqRespWrapper().convertResponse(item);
+            busyFlightResponse.setFare(getFareCalculationStrategy().calculate(item).getFinalPrice());
+            result.add(busyFlightResponse);
+        }
+        return result;
     }
 }
