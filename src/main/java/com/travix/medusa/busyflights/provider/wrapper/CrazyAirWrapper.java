@@ -4,6 +4,7 @@ import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
 import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -15,6 +16,8 @@ import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 /**
  * Created by amir on 5/9/19.
  */
+
+@Component("crazyAirWrapper")
 public class CrazyAirWrapper implements FlightProviderWrapper<CrazyAirRequest,CrazyAirResponse>{
     @Override
     public CrazyAirRequest convertRequest(BusyFlightsRequest request) {
