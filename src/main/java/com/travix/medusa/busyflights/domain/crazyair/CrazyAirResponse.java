@@ -1,7 +1,9 @@
 package com.travix.medusa.busyflights.domain.crazyair;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class CrazyAirResponse {
 

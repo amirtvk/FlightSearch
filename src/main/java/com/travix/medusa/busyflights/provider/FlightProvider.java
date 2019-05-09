@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface FlightProvider<I, O> {
 
+    String getProviderName();
+
     FlightProviderClient<I, O> getClient();
 
     FlightProviderWrapper<I, O> getReqRespWrapper();
@@ -25,6 +27,7 @@ public interface FlightProvider<I, O> {
 
         for(O item : clientResponse){
             BusyFlightsResponse busyFlightResponse = getReqRespWrapper().convertResponse(item);
+            busyFlightResponse.setSupplier(getProviderName());
             busyFlightResponse.setFare(getFareCalculationStrategy().calculate(item).getFinalPrice());
             result.add(busyFlightResponse);
         }
