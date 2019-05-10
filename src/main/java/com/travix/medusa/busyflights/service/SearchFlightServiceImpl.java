@@ -43,11 +43,13 @@ public class SearchFlightServiceImpl implements SearchFlightService {
     @Override
     public List<BusyFlightsResponse> search(BusyFlightsRequest request) {
 
+        flightRegistery.getProviders().get(1).searchFilghts(request);
+
         return flightRegistery.getProviders()
                 .stream()
                 .map(provider -> executor.submit(() -> provider.searchFilghts(request)))
                 .flatMap(l -> getFutureResult(l).stream())
-//                .sorted(Comparator.comparingDouble(BusyFlightsResponse::getFare))
+                .sorted(sortComparatorGenerator.generateSortComparator(request))
                 .collect(Collectors.toList());
     }
 
@@ -56,6 +58,7 @@ public class SearchFlightServiceImpl implements SearchFlightService {
             return future.get();
         } catch (InterruptedException|ExecutionException e) {
 //            log.error("Error fetching response from supplier {}", e);
+            e.printStackTrace();
             return new ArrayList();
         }
     }

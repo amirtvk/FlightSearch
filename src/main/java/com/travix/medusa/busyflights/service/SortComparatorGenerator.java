@@ -24,7 +24,7 @@ public class SortComparatorGenerator {
     private String defaultSortOrder;
 
 
-    public  Comparator generateSortComparator(BaseRequest request){
+    public  Comparator<BusyFlightsResponse> generateSortComparator(BaseRequest request){
         String sortField = extractSortFieldName(request);
         Comparator<BusyFlightsResponse> comparator;
         switch (sortField){

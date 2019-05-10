@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
-import static java.time.format.DateTimeFormatter.ISO_INSTANT;
+import static java.time.format.DateTimeFormatter.*;
 
 /**
  * Created by amir on 5/9/19.
@@ -38,11 +37,11 @@ public class CrazyAirWrapper implements FlightProviderWrapper<CrazyAirRequest,Cr
                 .airline(response.getAirline())
                 .departureDate(convertFormat(
                         response.getDepartureDate(),
-                        ISO_INSTANT.withZone(ZoneId.systemDefault()),
+                        ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault()),
                         ISO_DATE_TIME))
                 .arrivalDate(convertFormat(
                         response.getArrivalDate(),
-                        ISO_INSTANT.withZone(ZoneId.systemDefault()),
+                        ISO_LOCAL_DATE_TIME.withZone(ZoneId.systemDefault()),
                         ISO_DATE_TIME))
                .build();
     }

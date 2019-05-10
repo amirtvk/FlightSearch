@@ -10,7 +10,7 @@ public class TimeValidator implements ConstraintValidator<TimeFormat, String> {
 
     @Override
     public void initialize(TimeFormat timeFormat) {
-        format = DateTimeFormatter.ISO_LOCAL_DATE;
+        format = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     }
     
     @Override

@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 /**
  * Created by amir on 5/9/19.
@@ -39,12 +40,12 @@ public class TouchJetWrapper implements FlightProviderWrapper<ToughJetRequest,To
                         .departureDate(convertFormat(
                                 response.getInboundDateTime(),
                                 ISO_INSTANT.withZone(ZoneId.systemDefault()),
-                                ISO_DATE_TIME))
+                                ISO_LOCAL_DATE_TIME))
 
                         .arrivalDate(convertFormat(
                                 response.getOutboundDateTime(),
                                 ISO_INSTANT.withZone(ZoneId.systemDefault()),
-                                ISO_DATE_TIME))
+                                ISO_LOCAL_DATE_TIME))
 
                         .build();
     }
