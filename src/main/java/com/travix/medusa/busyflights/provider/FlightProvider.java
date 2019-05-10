@@ -9,7 +9,7 @@ import com.travix.medusa.busyflights.provider.wrapper.FlightProviderWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface FlightProvider<I, O> {
+public interface FlightProvider<I, O>  extends FlightProviderInterface {
 
     String getProviderName();
 

@@ -2,6 +2,7 @@ package com.travix.medusa.busyflights.controller;
 
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
+import com.travix.medusa.busyflights.service.SearchFlightService;
 import com.travix.medusa.busyflights.service.SortComparatorGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,7 @@ import java.util.List;
 public class SearchFlightController {
 
     @Autowired
-    SortComparatorGenerator sortComparatorGenerator;
-
+    SearchFlightService searchFlightService;
 
     @RequestMapping(value = "/searchFlights", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody

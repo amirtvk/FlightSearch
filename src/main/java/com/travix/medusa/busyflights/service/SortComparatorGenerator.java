@@ -10,7 +10,7 @@ import java.util.Comparator;
 @Component
 public class SortComparatorGenerator {
 
-    public static final String SORT_ORDER_SEPERATOR  = ",";
+    public static final String SORT_ORDER_SEPARATOR = ",";
 
     public enum SortOrder{
         Ascending,
@@ -44,16 +44,16 @@ public class SortComparatorGenerator {
     public String extractSortFieldName(BaseRequest request){
         if(request.getSort() == null || request.getSort().isEmpty())
             return defaultSortField;
-        return request.getSort().split(SORT_ORDER_SEPERATOR)[0];
+        return request.getSort().split(SORT_ORDER_SEPARATOR)[0];
     }
 
 
 
     public SortOrder extractSortOrder(BaseRequest request){
-        if(request.getSort() == null || request.getSort().isEmpty() || request.getSort().split(SORT_ORDER_SEPERATOR).length == 1)
+        if(request.getSort() == null || request.getSort().isEmpty() || request.getSort().split(SORT_ORDER_SEPARATOR).length == 1)
             return defaultSortOrder.equalsIgnoreCase("asc") ? SortOrder.Ascending : SortOrder.Descending;
 
-        String[] sortParam = request.getSort().split(SORT_ORDER_SEPERATOR);
+        String[] sortParam = request.getSort().split(SORT_ORDER_SEPARATOR);
         return sortParam[1].equalsIgnoreCase("ASC") ? SortOrder.Ascending : SortOrder.Descending;
     }
 
