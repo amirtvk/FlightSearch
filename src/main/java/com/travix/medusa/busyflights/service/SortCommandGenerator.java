@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Comparator;
 
 @Component
-public class SortComparatorGenerator {
+public class SortCommandGenerator {
 
     public static final String SORT_ORDER_SEPARATOR = ",";
 
@@ -24,7 +24,7 @@ public class SortComparatorGenerator {
     private String defaultSortOrder;
 
 
-    public  Comparator<BusyFlightsResponse> generateSortComparator(BaseRequest request){
+    public  Comparator<BusyFlightsResponse> generateSortCommand(BaseRequest request){
         String sortField = extractSortFieldName(request);
         Comparator<BusyFlightsResponse> comparator;
         switch (sortField){

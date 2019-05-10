@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,8 +27,10 @@ public class SearchFlightServiceImpl implements SearchFlightService {
     FlightProviderRegistry flightRegistery;
 
     @Autowired
-    SortComparatorGenerator sortComparatorGenerator;
+    SortCommandGenerator sortCommandGenerator;
 
+    @Autowired
+    ProjectionCommandGenerator projectionCommandGenerator;
 
     private ExecutorService executor;
 
@@ -49,7 +51,9 @@ public class SearchFlightServiceImpl implements SearchFlightService {
                 .stream()
                 .map(provider -> executor.submit(() -> provider.searchFilghts(request)))
                 .flatMap(l -> getFutureResult(l).stream())
-                .sorted(sortComparatorGenerator.generateSortComparator(request))
+                .sorted(sortCommandGenerator.generateSortCommand(request))
+                .filter( bfr -> Optional.ofNullable(request.getProjection()).isPresent() )
+                .map(projectionCommandGenerator.generateProjectionCommand(request))
                 .collect(Collectors.toList());
     }
 

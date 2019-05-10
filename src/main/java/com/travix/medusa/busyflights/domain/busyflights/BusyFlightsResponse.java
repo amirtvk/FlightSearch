@@ -3,7 +3,7 @@ package com.travix.medusa.busyflights.domain.busyflights;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
+@Builder(toBuilder = true)
 @Data
 public class BusyFlightsResponse {
     private String airline;

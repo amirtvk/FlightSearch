@@ -13,7 +13,7 @@ public class CrazyAirClient implements FlightProviderClient<CrazyAirRequest,Craz
     public List<CrazyAirResponse> searchFlights(CrazyAirRequest request) {
         return Arrays.asList(CrazyAirResponse.builder()
                 .airline("Crazy")
-                .price(200)
+                .price(200.12345)
                 .arrivalDate("2011-12-03T10:15:30")
                 .departureDate("2011-12-03T10:15:30")
                 .destinationAirportCode("AAZ")

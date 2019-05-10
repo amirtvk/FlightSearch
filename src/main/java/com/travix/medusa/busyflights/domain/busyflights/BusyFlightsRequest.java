@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Size;
+import java.util.Optional;
 /*
     This class inherit from BaseRequest class in order to add sort  functionality
 */
@@ -33,18 +34,25 @@ public class BusyFlightsRequest extends BaseRequest {
     @Range(min = 1, max = 4)
     private int numberOfPassengers;
 
+    private Optional<String> limit;
+
+
     @Builder
     public BusyFlightsRequest(String sort,
+                              String projection,
                               String origin,
                               String destination,
                               String departureDate,
                               String returnDate,
                               int numberOfPassengers) {
-        super(sort);
+        super(sort, projection);
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
         this.returnDate = returnDate;
         this.numberOfPassengers = numberOfPassengers;
     }
+
+
+
 }

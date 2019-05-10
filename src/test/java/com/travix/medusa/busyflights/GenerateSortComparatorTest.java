@@ -1,6 +1,6 @@
 package com.travix.medusa.busyflights;
 
-import com.travix.medusa.busyflights.service.SortComparatorGenerator;
+import com.travix.medusa.busyflights.service.SortCommandGenerator;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import org.junit.Test;
@@ -12,21 +12,21 @@ import org.junit.Assert;
 
 import java.util.Comparator;
 
-@ContextConfiguration(classes = {SortComparatorGenerator.class})
+@ContextConfiguration(classes = {SortCommandGenerator.class})
 
 @RunWith(SpringJUnit4ClassRunner.class)
 
 public class GenerateSortComparatorTest {
 
     @Autowired
-    SortComparatorGenerator sortComparatorGenerator;
+    SortCommandGenerator sortCommandGenerator;
 
     @Test
     public void shouldGenerateCorrectComparator(){
 
         BusyFlightsRequest request = TestUtil.getRandomBusyFlightsRequest();
         request.setSort("fare,asc");
-        Comparator<BusyFlightsResponse> ascendingSortComparator = sortComparatorGenerator.generateSortComparator(request);
+        Comparator<BusyFlightsResponse> ascendingSortComparator = sortCommandGenerator.generateSortCommand(request);
         BusyFlightsResponse response1 = TestUtil.getRandomBusyFlightsResponse(request);
         Double fare1 = 25.9999;
         response1.setFare(fare1);
@@ -39,7 +39,7 @@ public class GenerateSortComparatorTest {
         Assert.assertEquals(0,ascendingSortComparator.compare(response1, response2));
 
         request.setSort("fare,desc");
-        Comparator<BusyFlightsResponse> descendingSortComparator = sortComparatorGenerator.generateSortComparator(request);
+        Comparator<BusyFlightsResponse> descendingSortComparator = sortCommandGenerator.generateSortCommand(request);
         response1.setFare(fare1);
         response2.setFare(fare2);
         Assert.assertEquals(1,descendingSortComparator.compare(response1, response2));
@@ -54,7 +54,7 @@ public class GenerateSortComparatorTest {
         BusyFlightsRequest request = TestUtil.getRandomBusyFlightsRequest();
 
         request.setSort(null);
-        Comparator<BusyFlightsResponse> ascendingSortComparator = sortComparatorGenerator.generateSortComparator(request);
+        Comparator<BusyFlightsResponse> ascendingSortComparator = sortCommandGenerator.generateSortCommand(request);
         BusyFlightsResponse response1 = TestUtil.getRandomBusyFlightsResponse(request);
         Double fare1 = 25.9999;
         response1.setFare(fare1);
@@ -67,7 +67,7 @@ public class GenerateSortComparatorTest {
         Assert.assertEquals(0,ascendingSortComparator.compare(response1, response2));
 
         request.setSort("");
-        ascendingSortComparator = sortComparatorGenerator.generateSortComparator(request);
+        ascendingSortComparator = sortCommandGenerator.generateSortCommand(request);
         response1.setFare(fare1);
         response2.setFare(fare2);
         Assert.assertEquals(-1,ascendingSortComparator.compare(response1, response2));
@@ -83,7 +83,7 @@ public class GenerateSortComparatorTest {
         BusyFlightsRequest request = TestUtil.getRandomBusyFlightsRequest();
 
         request.setSort("fare");
-        Comparator<BusyFlightsResponse> ascendingSortComparator = sortComparatorGenerator.generateSortComparator(request);
+        Comparator<BusyFlightsResponse> ascendingSortComparator = sortCommandGenerator.generateSortCommand(request);
         BusyFlightsResponse response1 = TestUtil.getRandomBusyFlightsResponse(request);
         Double fare1 = 25.9999;
         response1.setFare(fare1);

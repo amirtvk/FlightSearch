@@ -15,7 +15,7 @@ public class ToughJetClient implements FlightProviderClient<ToughJetRequest, Tou
     public List<ToughJetResponse> searchFlights(ToughJetRequest request) {
         return Arrays.asList(ToughJetResponse.builder()
                 .basePrice(180)
-                .tax(10)
+                .tax(10.987654)
                 .discount(50)
                 .arrivalAirportName("AAZ")
                 .departureAirportName("ASD")
