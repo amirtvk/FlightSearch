@@ -1,4 +1,4 @@
-package com.travix.medusa.busyflights.validation;
+package com.travix.medusa.busyflights.controller.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

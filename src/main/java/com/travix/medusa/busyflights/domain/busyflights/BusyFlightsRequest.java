@@ -1,14 +1,12 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
 import com.travix.medusa.busyflights.domain.BaseRequest;
-import com.travix.medusa.busyflights.validation.IataFormat;
-import com.travix.medusa.busyflights.validation.TimeFormat;
+import com.travix.medusa.busyflights.controller.validation.IataFormat;
+import com.travix.medusa.busyflights.controller.validation.TimeFormat;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Size;
-import java.util.Optional;
 /*
     This class inherit from BaseRequest class in order to add sort  functionality
 */
