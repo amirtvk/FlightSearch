@@ -20,7 +20,7 @@ public class SearchFlightController {
 
     @RequestMapping(value = "/searchFlights", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
-    public List<BusyFlightsResponse> searchAirFare(@Valid BusyFlightsRequest request) {
+    public List<BusyFlightsResponse> searchAirFare( BusyFlightsRequest request) {
         return searchFlightService.search(request);
     }
 }

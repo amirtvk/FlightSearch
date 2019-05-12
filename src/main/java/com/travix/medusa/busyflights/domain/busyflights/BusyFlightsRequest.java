@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode
 public class BusyFlightsRequest extends BaseRequest {
 
     @Size(min = 3, max = 3)
@@ -50,7 +51,5 @@ public class BusyFlightsRequest extends BaseRequest {
         this.returnDate = returnDate;
         this.numberOfPassengers = numberOfPassengers;
     }
-
-
 
 }
