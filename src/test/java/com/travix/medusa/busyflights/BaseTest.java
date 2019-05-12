@@ -20,6 +20,9 @@ public class BaseTest {
     public static final String VALID_RETURN_DATE = "2011-12-09T11:20:30";
     public static final String VALID_NUMBER_OF_PASSENGERS = "1";
     public static final String VALID_SORT_VALUE = "fare,asc";
+    public static final String SORT_BY_FARE_ASCENDING = "fare,asc";
     public static final String VALID_PROJECTION_VALUE = "noProjection";
+    public static final String FARE_ROUND_TWO_DECIMAL_PROJECTION = "fareRoundTwoDecimal";
+
 
 }
