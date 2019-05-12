@@ -5,7 +5,7 @@ package com.travix.medusa.busyflights;
  */
 public class BaseTest {
 
-    public static final String SERVICE_URL = "/searchFlights";
+    public static final String SERVICE_URL = "/flights/search";
     public static final String ORIGIN_PARAM = "origin";
     public static final String DESTINATION_PARAM = "destination";
     public static final String DEPARTURE_PARAM = "departureDate";

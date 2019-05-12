@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Size;
 /*
-    This class inherit from BaseRequest class in order to add sort  functionality
+    This class inherit from BaseRequest class in order to add sort and projection functionality
 */
 
 @NoArgsConstructor

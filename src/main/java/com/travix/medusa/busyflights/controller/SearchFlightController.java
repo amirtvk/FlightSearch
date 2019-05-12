@@ -18,9 +18,11 @@ public class SearchFlightController {
     @Autowired
     SearchFlightService searchFlightService;
 
-    @RequestMapping(value = "/searchFlights", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/flights/search", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseBody
     public List<BusyFlightsResponse> searchFlights(@Valid BusyFlightsRequest request) {
         return searchFlightService.search(request);
     }
+
+    //TODO: Add a Controller to expose auto generated Documents(meta-data) required this service
 }

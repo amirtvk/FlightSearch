@@ -3,6 +3,8 @@ package com.travix.medusa.busyflights.service;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
 import com.travix.medusa.busyflights.provider.FlightProviderRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class SearchFlightServiceImpl implements SearchFlightService {
+
+    private static final Logger logger = LoggerFactory.getLogger(SearchFlightServiceImpl.class);
 
     @Autowired
     FlightProviderRegistry flightRegistery;
@@ -45,6 +49,7 @@ public class SearchFlightServiceImpl implements SearchFlightService {
     @Override
     public List<BusyFlightsResponse> search(BusyFlightsRequest request) {
 
+        logger.debug("search for flights {}" , request );
         return flightRegistery.getProviders()
                 .stream()
                 .map(provider -> executor.submit(() -> provider.searchFlights(request)))
@@ -58,9 +63,11 @@ public class SearchFlightServiceImpl implements SearchFlightService {
     private List<BusyFlightsResponse> getFutureResult(Future<List<BusyFlightsResponse>> future) {
         try {
             return future.get();
-        } catch (InterruptedException|ExecutionException e) {
-//            log.error("Error fetching response from supplier {}", e);
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            logger.error("Error getting response from provider {}", e);
+            return new ArrayList();
+        }  catch (ExecutionException e) {
+            logger.error("Error getting response from provider {}", e);
             return new ArrayList();
         }
     }

@@ -22,7 +22,7 @@ public class ToughJetClient implements FlightProviderClient<ToughJetRequest, Tou
     @Autowired
     RestTemplate restTemplate;
 
-    @Value("${clients.uri:http://www.tough-jet.air/search}")
+    @Value("${clients.toughjet.url:http://www.tough-jet.air/search}")
     private String url;
 
     @Override

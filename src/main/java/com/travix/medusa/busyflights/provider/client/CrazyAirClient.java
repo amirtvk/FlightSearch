@@ -23,7 +23,7 @@ public class CrazyAirClient implements FlightProviderClient<CrazyAirRequest,Craz
     @Autowired
     RestTemplate restTemplate;
 
-    @Value("${clients.uri:http://www.crazy.air/search}")
+    @Value("${clients.crazyair.url:http://www.crazy.air/search}")
     private String url;
 
 
